@@ -13,9 +13,7 @@ app.use(express.json())
 app.use("/api/auth", router)
 
 
-
-const port = process.env.PORT || 8000
-
+const port = process.env.PORT || 5000
 
 connectDB()
     .then(() => {

@@ -29,7 +29,11 @@ const register = async (req, res) => {
 
         const createdUser = await UserModel.create({ username, email, phone, password })
 
-        res.status(200).json({ message: createdUser })
+        res.status(200).json({
+            message: "registration Successful",
+            token: createdUser.generateToken(),
+            userId: createdUser._id.toString()
+        })
     } catch (error) {
         console.log(error);
         res.status(500).send("Something went wrong")

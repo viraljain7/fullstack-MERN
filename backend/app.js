@@ -1,16 +1,33 @@
 import express from "express"
 import router from "./router/auth-router.js";
+import connectDB from "./db/connectDB.js";
+
+import dotenv from "dotenv"
+dotenv.config({
+    path: './.env'
+})
+
 
 const app = express();
-
+app.use(express.json())
 app.use("/api/auth", router)
 
 
 
+const port = process.env.PORT || 8000
 
 
+connectDB()
+    .then(() => {
+        app.on("error", (err) => {
+            console.log("ERROR:: ", err);
+        })
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
 
-const PORT = 5000;
-app.listen(PORT, () => {
-    console.log('RUNNING ON PORT :: ', PORT);
-})
+    })
+    .catch((error) => {
+        console.error("MONGODB CONNECTION FAILED::", error);
+        throw error;
+    })

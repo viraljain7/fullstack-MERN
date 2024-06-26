@@ -1,5 +1,6 @@
 // models/User.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
@@ -11,6 +12,18 @@ const userSchema = new mongoose.Schema({
         default: false
     }
 });
+
+//dont use arrow function bcz ()=>{} doesnt have this access in it
+userSchema.pre("save", async function (next) {
+    const user = this;
+    if (!user.isModified("password")) return next();
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = await bcrypt.hash(user.password, salt)
+    user.password = hashedPassword;
+    next()
+})
+
 
 const User = mongoose.model('User', userSchema);
 

@@ -43,6 +43,9 @@ userSchema.methods.generateToken = function (password) {
         console.error(error)
     }
 }
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password)
+}
 
 const User = mongoose.model('User', userSchema);
 

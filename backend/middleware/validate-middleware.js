@@ -4,11 +4,14 @@ const validator = (schema) => async (req, res, next) => {
         req.body = parseBody;
         next()
     } catch (error) {
-        const error_message = error.errors[0].message;
+        const extraDetails = error.errors[0].message;
+        const status = 422;
+        const message = "Fill the input properly"
 
-        res.status(400).json({
-            message: error_message
-        })
+        const errorObj = {
+            status, message, extraDetails
+        }
+        next(errorObj)
 
     }
 }

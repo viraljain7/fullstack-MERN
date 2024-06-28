@@ -18,8 +18,23 @@ const signupSchema = z.object({
         .max(15, { message: 'Phone number is too long' }),
     password: z.string({ required_error: "Password is required" })
         .trim()
-        .min(6, { message: 'Password must be at least 6 characters long' })
+        .min(4, { message: 'Password must be at least 4 characters long' })
         .max(100, { message: 'Password is too long' }),
 });
 
-export default signupSchema;
+
+const loginSchema = z.object({
+
+    email: z.string({ required_error: "Email is required" })
+        .trim()
+        .email({ message: 'Invalid email address' })
+        .min(5, { message: 'Email is too short at lest 5 char' })
+        .max(255, { message: 'Email is too long' }),
+
+    password: z.string({ required_error: "Password is required" })
+        .trim()
+        .min(4, { message: 'Password must be at least 4 characters long' })
+        .max(100, { message: 'Password is too long' }),
+});
+
+export { signupSchema, loginSchema };

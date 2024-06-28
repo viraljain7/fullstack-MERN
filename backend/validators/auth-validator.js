@@ -2,24 +2,24 @@
 import { z } from 'zod';
 
 const signupSchema = z.object({
-    username: z.string()
+    username: z.string({ required_error: "Name is required" })
         .trim()
-        .min(2, 'Username is required at lest 2 char')
-        .max(100, 'Username is too long'),
-    email: z.string()
+        .min(2, { message: 'Username is required at lest 2 char' })
+        .max(100, { message: 'Username is too long' }),
+    email: z.string({ required_error: "Email is required" })
         .trim()
-        .email('Invalid email address')
-        .min(5, 'Email is too short at lest 5 char')
-        .max(255, 'Email is too long'),
-    phone: z.string()
+        .email({ message: 'Invalid email address' })
+        .min(5, { message: 'Email is too short at lest 5 char' })
+        .max(255, { message: 'Email is too long' }),
+    phone: z.string({ required_error: "Phone No is required" })
         .trim()
-        .regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number')
-        .min(10, 'Phone number is too short at lest 10 digit')
-        .max(15, 'Phone number is too long'),
-    password: z.string()
+        .regex(/^\+?[1-9]\d{1,14}$/, { message: 'Invalid phone number' })
+        .min(10, { message: 'Phone number is too short at lest 10 digit' })
+        .max(15, { message: 'Phone number is too long' }),
+    password: z.string({ required_error: "Password is required" })
         .trim()
-        .min(6, 'Password must be at least 6 characters long')
-        .max(100, 'Password is too long'),
+        .min(6, { message: 'Password must be at least 6 characters long' })
+        .max(100, { message: 'Password is too long' }),
 });
 
 export default signupSchema;

@@ -1,29 +1,40 @@
-/* src/components/Navbar.css */
-
 .navbar {
-  background-color: #1f1f1f;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
+  background-color: #007bff;
+  color: white;
 }
 
 .left {
-  color: rgb(255, 255, 255);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: large;
-  font-weight: bolder;
+  flex-grow: 1;
+}
+
+.right {
+  display: flex;
+  gap: 1rem;
 }
 
 .navbar-link {
-  color: #ffffff;
+  color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.3s;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-.navbar-link:hover,
-.navbar-link.active {
-  background-color: #333333;
-  border-radius: 4px;
+.navbar-link:hover {
+  text-decoration: underline;
+}
+
+.desktop-only {
+  display: none;
+}
+
+.mobile-only {
+  display: flex;
+}
+
+/* Media queries for responsive design */
+@media (min-width: 768px) {
+  .desktop-only {
+    display: flex;
+  }
+  .mobile-only {
+    display: none;
+  }
 }

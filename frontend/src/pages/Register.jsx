@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import './common.css';
+import { TextField, Button, Container, Typography, Box } from '@mui/material';
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
+        username: '',
         email: '',
+        phone: '',
         password: '',
     });
 
@@ -11,7 +13,7 @@ const RegistrationForm = () => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value
+            [name]: value,
         });
     };
 
@@ -22,61 +24,65 @@ const RegistrationForm = () => {
     };
 
     return (
-        <div className="form-container">
-            <h1>
-                <span>Registration Form</span>
-            </h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="phone">Phone:</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Register</button>
-            </form>
-        </div>
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 4, p: 3, boxShadow: 2, borderRadius: 2 }}>
+                <Typography variant="h4" component="h1" gutterBottom>
+                    Register
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <Box mb={2}>
+                        <TextField
+                            fullWidth
+                            label="Username"
+                            id="username"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Box>
+                    <Box mb={2}>
+                        <TextField
+                            fullWidth
+                            label="Email"
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Box>
+                    <Box mb={2}>
+                        <TextField
+                            fullWidth
+                            label="Phone"
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Box>
+                    <Box mb={2}>
+                        <TextField
+                            fullWidth
+                            label="Password"
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </Box>
+                    <Button variant="contained" color="primary" type="submit" fullWidth>
+                        Register
+                    </Button>
+                </form>
+            </Box>
+        </Container>
     );
 };
 

@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Service from './pages/Service';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

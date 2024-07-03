@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
-
+import { useNavigate } from "react-router-dom"
 const RegistrationForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -17,10 +18,33 @@ const RegistrationForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Here you can handle form submission, e.g., send the data to a server
         console.log('Form submitted:', formData);
+
+        try {
+            const response = await fetch("http://localhost:5000/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            if (response.ok) {
+                setFormData({
+                    username: '',
+                    email: '',
+                    phone: '',
+                    password: '',
+                })
+                navigate("/login")
+            }
+            console.log(response)
+        } catch (error) {
+            console.log('Register  error:: ', error);
+
+        }
     };
 
     return (

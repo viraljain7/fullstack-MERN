@@ -9,8 +9,16 @@ dotenv.config({
     path: './.env'
 })
 
+import cors from "cors";
+const corsOption = {
+    origin: "http://localhost:5173",
+    methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
+    Credential: true
+}
+
 
 const app = express();
+app.use(cors(corsOption))
 app.use(express.json())
 app.use("/api/auth", authRouter)
 app.use("/api/form", contactRouter)
